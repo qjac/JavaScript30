@@ -58,21 +58,17 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  // window.addEventListener('keydown', playSound);
+  window.addEventListener('keydown', playSound);
 
-  // function playSound(e) {
-  //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-  //   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-  //   if (!audio) return; // if no audio associated with keyCode, do nothing.
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return; // if no audio associated with keyCode, do nothing.
 
-  //   audio.currentTime = 0; // to rewind audio file to start on each keypress
-  //   key.classList.add('playing');
-  //   audio.play();
-  // }
-
-  // const keys = document.querySelectorAll('.key');
-
-  
+    audio.currentTime = 0; // to rewind audio file to start on each keypress
+    key.classList.add('playing');
+    audio.play();
+  }
 
   // TODO: match keypress behavior to click
   // add onClick event listener to each div
