@@ -58,31 +58,52 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  window.addEventListener('keydown', playSound);
+  // window.addEventListener('keydown', playSound);
 
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-    if (!audio) return; // if no audio associated with keyCode, do nothing.
+  // function playSound(e) {
+  //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+  //   const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+  //   if (!audio) return; // if no audio associated with keyCode, do nothing.
 
-    audio.currentTime = 0; // to rewind audio file to start on each keypress
-    key.classList.add('playing');
-    audio.play();
-  }
+  //   audio.currentTime = 0; // to rewind audio file to start on each keypress
+  //   key.classList.add('playing');
+  //   audio.play();
+  // }
 
-  const keys = document.querySelectorAll('.key');
+  // const keys = document.querySelectorAll('.key');
 
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  // keys.forEach(key => key.addEventListener('transitionend', removeTransition));
 
-  function removeTransition(e) {
-    if(e.propertyName !== 'transform') return; //only need to fire on one of the transitions. choose any one. chose transform.
-     this.classList.remove('playing');
-  }
+  // function removeTransition(e) {
+  //   if(e.propertyName !== 'transform') return; //only need to fire on one of the transitions. choose any one. chose transform.
+  //    this.classList.remove('playing');
+  // }
 
   // TODO: match keypress behavior to click
   // add onClick event listener to each div
   // when clicked play sound, and add .playing
   // after transitionend remove .playing (or would this happen regardless since there's already a transitionened event listener on all div.key)
+
+   const keys = document.querySelectorAll('.key');
+   // console.log(keys);
+
+  keys.forEach(key => key.addEventListener('click', playSoundOnClick));
+
+  function playSoundOnClick(e) {
+    // console.log(Object.Keys(e));
+
+      //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = this.getAttribute('data-key');
+    const audio = document.querySelector(`audio[data-key="${key}"]`);
+    if (!audio) return;
+
+    audio.currentTime = 0; 
+    audio.play();
+
+    this.classList.add('playing');
+
+    // console.log(this);
+  }
 
 </script>
 
