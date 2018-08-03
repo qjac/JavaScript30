@@ -70,21 +70,18 @@
     audio.play();
   }
 
-  // TODO: match keypress behavior to click
+  // CHALLENGE TODO: match keypress behavior to click
   // add onClick event listener to each div
   // when clicked play sound, and add .playing
   // after transitionend remove .playing (or would this happen regardless since there's already a transitionened event listener on all div.key- answer: yes!)
 
-   const keys = document.querySelectorAll('.key');
-   // console.log(keys);
+  const keys = document.querySelectorAll('.key');
 
   keys.forEach(key => key.addEventListener('click', playSoundOnClick));
 
   function playSoundOnClick(e) {
-    // console.log(Object.Keys(e));
-
-      //   const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = this.getAttribute('data-key');
+
     const audio = document.querySelector(`audio[data-key="${key}"]`);
     if (!audio) return;
 
@@ -92,8 +89,6 @@
     audio.play();
 
     this.classList.add('playing');
-
-    // console.log(this);
   }
 
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
