@@ -58,6 +58,31 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  window.addEventListener('keydown', playSound);
+
+  function playSound(e) {
+    // console.log(e.keycode);
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return; // if no audio associated with keyCode, do nothing.
+    // console.log(audio);
+
+    audio.currentTime = 0; // to rewind audio file to start on each keypress
+    key.classList.add('playing');
+    audio.play();
+  }
+
+  const keys = document.querySelectorAll('.key');
+  // console.log(keys);
+
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+  function removeTransition(e) {
+    // console.log(e);
+    if(e.propertyName !== 'transform') return; //only need to fire on one of the transitions. choose any one. chose transform.
+     // console.log(e.propertyName);
+     this.classList.remove('playing');
+  }
 
 </script>
 
