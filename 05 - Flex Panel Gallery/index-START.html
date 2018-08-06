@@ -24,6 +24,8 @@
     .panels {
       min-height:100vh;
       overflow: hidden;
+      display: flex;
+
     }
 
     .panel {
@@ -41,6 +43,12 @@
       font-size: 20px;
       background-size:cover;
       background-position:center;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+
     }
 
 
@@ -62,12 +70,18 @@
       text-shadow:0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
     }
+
+    .panel > *:first-child { transform: translateY(-1000%);}
+    .panel.open-active > *:first-child { transform: translateY(0);}
     .panel p:nth-child(2) {
       font-size: 4em;
     }
+    .panel > *:last-child { transform: translateY(1000%);}
+    .panel.open-active > *:last-child { transform: translateY(0);}
 
     .panel.open {
       font-size:40px;
+      flex: 5;
     }
 
   </style>
@@ -102,6 +116,23 @@
   </div>
 
   <script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+      if(e.propertyName.includes('flex')){
+           this.classList.toggle('open-active');
+      }
+      // console.log(e.propertyName);
+      // console.log(this);
+      // console.log(this.classList);
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
 
   </script>
 
