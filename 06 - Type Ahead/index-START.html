@@ -19,22 +19,15 @@
 
   const cities = [];
 
-  fetch(endpoint) //fetch returns a promise
+  fetch(endpoint)
     .then(blob => blob.json()) 
-    //returns blob that needs to be converted into json for use. .json returns another promise
     .then(data => cities.push(...data)); 
-    //now you have the data in a massive object of arrays. push those arrays into the cities[] using spread operator (otherwise cities array contains the entire array of nested arrays as opposed to just the nested city arrays).
-  // console.log(fetch(endpoint)); 
-  // console.log(cities);
 
   function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
-      // figure out if typed word matches anything in the cities array and return only those results
       const regex = new RegExp(wordToMatch, 'gi');
       return place.city.match(regex) || place.state.match(regex)
     });
-    // console.log(wordToMatch);
-    // console.log(findMatches);
   } 
 
   function numberWithCommas(x) {
@@ -42,9 +35,7 @@
   }
 
   function displayMatches() {
-    // console.log(this.value);
     const matchArray = findMatches(this.value, cities);
-      // console.log(matchArray);
       const html = matchArray.map(place => {
         const regex = new RegExp(this.value, 'gi');
         const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
