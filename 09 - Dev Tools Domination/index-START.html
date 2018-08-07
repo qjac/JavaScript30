@@ -17,29 +17,105 @@
       p.style.fontSize = '50px';
     }
 
+// let's log some shit.
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', '🤡'); // %s as a variable
+
+    let var1 = 'var';
+    console.log(`Hello I am a ${var1} string!`); // new w/ ES6! Template literals
 
     // Styled
+    console. log('%c I am some great text', 'font-size:50px; background: violet;'); 
 
     // warning!
+    console.warn('OH NO!');
 
     // Error :|
+    console.error('OH SHIT!');
 
     // Info
+    console.info('Fun facts or helpful console info goes here.');
 
     // Testing
+    //console msg only shows when first arg evaluates to false.
+    console.assert(1 === 1, 'That is right!'); // if true, nothing logs.
+    console.assert(1 === 2, 'That is wrong!'); // this will log
+
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'Class not found.');
 
     // clearing
+    console.clear(); //clears console
 
     // Viewing DOM Elements
+    console.log(p); //logs the html of the p tag as a string. logs the element itself
+    console.dir(p); //logs dropdown of object/node with all of the properties and methods available
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+    }); //standard logging
+
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`); //will group it by dog.name
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+      console.groupEnd(`${dog.name}`); //will end group by dog.name
+    }); //standard grouped logging
+
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`); //will default to collapsing group in console
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+      console.groupEnd(`${dog.name}`); 
+    });
+
+     dogs.forEach(dog => {
+      console.group(`${dog.name}`); //will group it by dog.name
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+      // console.groupEnd(`${dog.name}`); 
+    }); //without the groupEnd the first group never ends and subsequent groupings are nested. maybe that's what you want...maybe not.
+     console.clear(); //otherwise everything stays in that never ending group!
+
 
     // counting
+    console.count(p);
+    console.count('JQ'); //counts how many times it's logged.
+    console.count('JQ');
+    console.count('JQ');
+    console.count('Steve');
+    console.count('JQ');
+    console.count('JQ');
+    console.count('Steve');
+    console.count('JQ');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('JQ');
+    console.count('JQ');
+
 
     // timing
+    console.time('fetching data'); //tell it to start timing
+    fetch('https://api.github.com/users/qjac') //do something that takes time
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data'); //tell it to end timing and log it. must use same string as starting time
+        console.log(data); //log the data...why not check it out?
+      });
+
+    // table it
+    console.table(dogs); //logs into a table format for easier reading
 
   </script>
 </body>
