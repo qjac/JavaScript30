@@ -58,3 +58,7 @@ function handleRangeUpdate() {
  progress.addEventListener('mousemove', (e) => mousedown && scrub(e)); //if mousedown = false, returns nothing. if true, it runs scrub
  progress.addEventListener('mousedown', () => mousedown = true);
  progress.addEventListener('mouseup', () => mousedown = false);
+
+
+// CHALLENGE TODO: update ranges only on mousedown (similar to scrub)
+// CHALLENGE TODO: implement full screen button
