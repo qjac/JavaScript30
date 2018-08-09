@@ -19,45 +19,63 @@
 
 	// when arrays/objects match, do the secret magic thing
 
-	const magicKeys = [
-		'ArrowUp',
-		'ArrowUp',
-		'ArrowDown',
-		'ArrowDown',
-		'ArrowLeft',
-		'ArrowRight',
-		'ArrowLeft',
-		'ArrowRight',
-		'KeyA',
-		'KeyB'
-	];
+	// const magicKeys = [
+	// 	'ArrowUp',
+	// 	'ArrowUp',
+	// 	'ArrowDown',
+	// 	'ArrowDown',
+	// 	'ArrowLeft',
+	// 	'ArrowRight',
+	// 	'ArrowLeft',
+	// 	'ArrowRight',
+	// 	'KeyA',
+	// 	'KeyB'
+	// ];
 
-	const userKeys = [];
+	// const userKeys = [];
 
-	function handleKeyDown(e) {
+	// function handleKeyDown(e) {
 
-		if (userKeys.length < 1 && e.code === magicKeys[0]) {
-			//listen for all keys, if it matches, push it to userKeys
-			userKeys.push(e.code);
+	// 	if (userKeys.length < 1 && e.code === magicKeys[0]) {
+	// 		//listen for all keys, if it matches, push it to userKeys
+	// 		userKeys.push(e.code);
 			
-			// console.table(userKeys);
-			// console.log(userKeys.length);
-			// console.log(e.code + ' equals ' + magicKeys[0]);
-		}  else if (userKeys.length >= 1 && e.code === magicKeys[userKeys.length])	{
-			userKeys.push(e.code);
+	// 		// console.table(userKeys);
+	// 		// console.log(userKeys.length);
+	// 		// console.log(e.code + ' equals ' + magicKeys[0]);
+	// 	}  else if (userKeys.length >= 1 && e.code === magicKeys[userKeys.length])	{
+	// 		userKeys.push(e.code);
 
-			// console.table(userKeys);
-			// console.log(userKeys.length);
-			// console.log(e.code + ' = ' + magicKeys[userKeys.length]);
-		} else {
-			userKeys.length = 0;
-			// console.table(userKeys);
-			// console.log(userKeys.length);
-			// console.log(e.code + ' !=');
-		} //end if statement
-	}
+	// 		// console.table(userKeys);
+	// 		// console.log(userKeys.length);
+	// 		// console.log(e.code + ' = ' + magicKeys[userKeys.length]);
+	// 	} else {
+	// 		userKeys.length = 0;
+	// 		// console.table(userKeys);
+	// 		// console.log(userKeys.length);
+	// 		// console.log(e.code + ' !=');
+	// 	} //end if statement
+	// }
 
-	document.addEventListener('keydown', handleKeyDown);
+	// document.addEventListener('keydown', handleKeyDown);
+
+
+	const pressed = [];
+	const secretCode = 'wesbos';
+
+	window.addEventListener('keyup', (e) => {
+		console.log(e.key);
+		pressed.push(e.key);
+		pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+		console.log(pressed);
+
+		if (pressed.join('').includes(secretCode)) {
+			console.log('ding ding');
+			cornify_add();
+		}
+	});
+
+
 </script>
 </body>
 </html>
