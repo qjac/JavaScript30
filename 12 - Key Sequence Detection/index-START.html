@@ -7,47 +7,26 @@
 </head>
 <body>
 <script>
-	// the plan
-	// set an arr to the desired key combo
-	// detect user keypress (or up or down?)
-	// if user keypress matches, store it to its own arr
-
-	// don't want to store keys not part of secret keycombo, right?
-	// only push user keys to array of user keys if they match magic key array
-
-	//maybe use and compare objects instead of arrays? which is better?
-
-	// when arrays/objects match, do the secret magic thing
-
 	const magicKeys = [
 		'ArrowUp',
 		'ArrowUp',
 		'ArrowDown',
-		// 'ArrowDown',
-		// 'ArrowLeft',
-		// 'ArrowRight',
-		// 'ArrowLeft',
-		// 'ArrowRight',
+		'ArrowDown',
+		'ArrowLeft',
+		'ArrowRight',
+		'ArrowLeft',
+		'ArrowRight',
 		'KeyA',
-		// 'KeyB'
+		'KeyB'
 	];
 
 	const userKeys = [];
 
 	function handleKeyDown(e) {
 		if (userKeys.length < 1 && e.code === magicKeys[0]) {
-			//listen for all keys, if it matches, push it to userKeys
 			userKeys.push(e.code);
-			
-			console.table(userKeys);
-			console.log(userKeys.length);
-			console.log(e.code + ' equals ' + magicKeys[0]);
 		}  else if (userKeys.length >= 1 && e.code === magicKeys[userKeys.length])	{
 			userKeys.push(e.code);
-
-			console.table(userKeys);
-			console.log(userKeys.length);
-			console.log(e.code + ' = ' + magicKeys[userKeys.length - 1]);
 		} else {
 			userKeys.length = 0;
 		} //end if statement
@@ -62,24 +41,7 @@
 		}
 	}
 
-	
-
 	document.addEventListener('keydown', handleKeyDown);
-
-
-// Wes Bos' solution
-	// const pressed = [];
-	// const secretCode = 'wesbos';
-
-	// window.addEventListener('keyup', (e) => {
-	// 	pressed.push(e.key);
-	// 	pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
-
-	// 	if (pressed.join('').includes(secretCode)) {
-	// 		cornify_add();
-	// 	}
-	// });
-
 
 </script>
 </body>
