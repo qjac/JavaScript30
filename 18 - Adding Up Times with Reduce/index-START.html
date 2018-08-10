@@ -5,6 +5,7 @@
   <title>Videos</title>
 </head>
 <body>
+
   <ul class="videos">
     <li data-time="5:43">
       Video 1
@@ -182,6 +183,42 @@
     </li>
   </ul>
 <script>
+  // const videos = document.querySelectorAll('.videos li');
+  // const videoTimes = [];
+
+  // (function getTimes() {
+  //   videos.forEach(videoTime => {
+  //     videoTimes.push(videoTime.dataset.time);
+  //   });
+  // }) ();
+
+  // videoTimes.reduce();
+
+  // getTimes();
+
+  // console.log(videoTimes);
+
+  // from tutorial
+  // const timeNodes = document.querySelectorAll('[data-time]'); //returns a node list
+  const timeNodes = [...document.querySelectorAll('[data-time]')]; //creates new array and spreads node list into it
+  // const timeNodes = Array.from(document.querySelectorAll('[data-time]')); //turns nodelist into array
+
+  const seconds = timeNodes
+    .map(node => node.dataset.time)
+    .map(timeCode => {
+      const [mins, secs] = timeCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    }).reduce((total, vidSeconds) => total + vidSeconds);
+
+    let secondsLeft = seconds;
+    const hours = Math.floor(secondsLeft / 3600);
+    secondsLeft = secondsLeft % 3600;
+
+    const mins = Math.floor(secondsLeft / 60);
+    secondsLeft = secondsLeft % 60;
+
+    console.log(hours, mins, secondsLeft);
+  
 </script>
 </body>
 </html>
