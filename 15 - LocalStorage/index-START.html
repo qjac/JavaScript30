@@ -18,9 +18,8 @@
     <p></p>
     <ul class="plates">
       <li>Loading Tapas...</li>
-    
     </ul>
-    <button type="button" >🌮 Check All 🌮</button>
+    <button type="button" name="toggleAllButton" class="button" >🌮 Check All 🌮</button>
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
@@ -32,6 +31,7 @@
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
+  const toggleAllButton = document.querySelector('.button');
 
   function addItem(e) {
     // this === the form element
@@ -78,12 +78,30 @@
     populateList(items, itemsList);
   }
 
+  function toggleAllDone(e) {
+    // console.log(e);
+    if(toggleAllButton.innerHTML === "🌮 Check All 🌮") {
+      items.forEach(item => {
+        item.done = true;
+      });
+      toggleAllButton.innerHTML = "Uncheck All";
+    } else {
+      items.forEach(item => {
+        item.done = false;
+      });
+      toggleAllButton.innerHTML = "🌮 Check All 🌮";
+    }
+   
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone); //add event listener to ul which is already on the page. if it's added to individual lis, and a new one is added, the new ones don't get the vent listener. so delegate the listeing to the ul which will watch out for all of its lis, even the brand new ones!
+  toggleAllButton.addEventListener('click', toggleAllDone);
 
   populateList(items, itemsList);
-
-  // CHALLENGE TODO: Make button to check or uncheck all items
+  // console.log(items);
 </script>
 
 
