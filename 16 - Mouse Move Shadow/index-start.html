@@ -35,6 +35,34 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 200; //100px
+
+  function shadow(e) {
+    // const width = hero.offsetWidth;
+    // const height = hero.offsetHeight;
+    // or use ES6 destructring
+    const { offsetWidth: width, offsetHeight: height} = hero;
+    let { offsetX: x, offsetY: y } = e;
+
+    // the x, y values get confused when you hover over childrena nd strt giving the x,y coordinates of them. this if statemdnt normalizes that so x, y values always reflect the position of mouse in window and doesn't reset when moving over the h1
+    if(this !== e.target) {
+      x = x + e.target.offsetLeft;
+      y = y + e.target.offsetTop;
+    }
+
+    const xWalk = Math.round((x / width * walk) - (walk/2));
+    const yWalk = Math.round((y / height * walk) - (walk/2));
+
+    text.style.textShadow = `${xWalk}px ${-yWalk*2}px 0 red, 
+    ${xWalk*2}px ${yWalk}px 0 orange,
+    ${xWalk*3}px ${-yWalk}px 0 yellow
+    `;
+
+  }
+
+  hero.addEventListener('mousemove', shadow);
 </script>
 </body>
 </html>
