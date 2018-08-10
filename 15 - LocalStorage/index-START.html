@@ -28,8 +28,57 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
+  function addItem(e) {
+    // this === the form element
+    e.preventDefault(); //stops page from reloading on submit
+    const text = (this.querySelector('[name=item]')).value; //all inputs have .value attr—it's what the user enter
+    const item = {
+      // text: text, or use ES6 shorthand
+      text,
+      done: false
+    }
+    items.push(item);
+    populateList(items, itemsList); //push items, itemsList along to the next fn
+    
+    // localStorage.setItem('items', items); //doesn't work cuz local storage stores only strings of key value pairs. in this case, key = items and value = string of objects ina rray
+    localStorage.setItem('items', JSON.stringify(items)); //turn it into a string. parse turns the string back into an array of objects. 
+
+    this.reset(); //clears input after submit. all inouts have this method
+  } //end addItem
+
+  function populateList(plates = [], platesList) {
+    // plates = [] will be a copy of items[]. this allows for more resiliency (other items can be pulled in and run through the function and the original items[] is preserved as is and can be used elsewhere int he program)
+
+    platesList.innerHTML = plates.map((plate, i) => {
+      // ${plate.done ? 'checked' : '';} will allow for persistence of checked state for each individual item in list
+      return `
+      <li>
+        <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+
+        <label for="item${i}">${plate.text}</label>
+      </li>
+      `; //setting innerHTML requires a string. map reurns an array. .join turns it into a string
+    }).join(''); //this will rerender entire list everytime an item is added. for larger sites with lots of updates or heavy animations, performance might be an issue and refactoring this (or using agukar or react) to only update the new list item.
+  } //end populateList
+
+  function toggleDone(e) {
+    // console.log(e.target);
+    if(!e.target.matches('input')) return;
+    const el = e.target;
+    // console.log(el.dataset.index);
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    // items[index].done
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone); //add event listener to ul which is already on the page. if it's added to individual lis, and a new one is added, the new ones don't get the vent listener. so delegate the listeing to the ul which will watch out for all of its lis, even the brand new ones!
+
+  populateList(items, itemsList);
 </script>
 
 
