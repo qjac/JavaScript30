@@ -35,6 +35,50 @@
   </div>
 
 <script>
+    // select the items
+    // on click down add class of active
+    // determine location of mouse 
+    // and if mousemove goes left or right, move the div the same number of pixels
+    // tldr: mouse down, mouse leave, mouse out, mouseup, mousemove
+
+    const slider = document.querySelector('.items');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        // console.log(e.pageX, slider.offsetLeft);
+        startX = e.pageX - slider.offsetLeft;
+        // console.log(startX);
+        scrollLeft = slider.scrollLeft;
+
+    });
+
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+        // this one does the heavy lifting
+        if(!isDown) return; //if it's not clicked, don't do any further work.
+        // console.log(isDown);
+        // console.log(startX);
+        e.preventDefault(); //stop defualt behaviors
+
+        const x = e.pageX - slider.offsetLeft;
+        // console.log({x, startX});
+        const walk = x - startX;
+        console.log(walk);
+        slider.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
   </body>
