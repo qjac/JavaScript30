@@ -20,8 +20,8 @@
   *, *:before, *:after { box-sizing: inherit; }
 
   div {
-    width:100%;
-    padding:100px;
+    width: 100%;
+    padding: 100px;
   }
 
   .one {
@@ -29,17 +29,33 @@
   }
 
   .two {
-    background:mistyrose;
+    background: mistyrose;
   }
 
   .three {
-    background:coral;
+    background: coral;
   }
 </style>
 
 <button></button>
 <script>
+const divs = document.querySelectorAll('div');
 
+function logText(e) {
+  console.log(this.classList.value);
+  //e.stopPropagation(); //stops the default bubbling. if capture set to true, will return only most top level event target and won't bubble down. if capture set to false (default), will capture deepest nested target and won't bubble up. 
+}
+
+//divs.forEach(div => div.addEventListener('click', logText)); // standard capture = false event fires on bubble up
+//divs.forEach(div => div.addEventListener('click', logText, {
+ // capture:true
+//})); //capture =true, set as event Listener third arg. this causes event to fire on capture (on the way down)
+
+divs.forEach(div => div.addEventListener('click', logText, {
+  capture:false,
+  once: true //will unbind itself after first instance of event logged. 
+  //equivalent to div.removeEventListener('click', logText);
+}));
 </script>
 </body>
 </html>
