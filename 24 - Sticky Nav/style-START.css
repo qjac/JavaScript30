@@ -84,3 +84,16 @@ nav a {
   transition:all 0.2s;
   text-transform: uppercase;
 }
+
+.fixed-nav .site-wrap {
+  transform: scale(1);
+}
+
+.fixed-nav nav {
+  position: fixed;
+  top:0;
+}
+
+.fixed-nav li.logo {
+  max-width: unset;
+}

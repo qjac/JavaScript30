@@ -54,6 +54,54 @@
   </div>
 
 <script>
+  // const navBar = document.querySelector('#main');
+  // const navLogo = navBar.querySelector('.logo');
+  // const navCoords = navBar.getBoundingClientRect();
+
+  // function stickNav() {
+  //   if (navCoords <= 0) {
+  //     // navCoords.top = 0;
+  //     navBar.style.position = 'fixed';
+  //     navBar.style.top = '0';
+  //   } else {
+  //     navBar.style.position = 'relative';
+  //     navBar.style.top = 'auto';
+  //   }
+    // console.log('2: ' + navCoords.top);
+  // } //didn't work quite right
+
+  // function stickNav() {
+  //   console.log(navTop, window.scrollY);
+  //   if (window.scrollY >= navTop) {
+  //     navBar.style.position = 'fixed';
+  //     navBar.style.top = '0';
+  //   } else {
+  //     navBar.style.position = 'relative';
+  //     // navBar.style.top = '0';
+  //   }
+  // } // works, but different from video
+
+  // document.addEventListener('scroll', stickNav);
+
+
+  // from Wes Bos
+  const navBar = document.querySelector('#main');
+  const navLogo = navBar.querySelector('.logo');
+  const navTop = navBar.offsetTop;
+  // console.log(navTop);
+
+  function stickNav() {
+    console.log(navTop, window.scrollY);
+    if (window.scrollY >= navTop) {
+      document.body.style.paddingTop = navBar.offsetHeight + 'px';
+      document.body.classList.add('fixed-nav');
+    } else {
+      document.body.classList.remove('fixed-nav');
+      document.body.style.paddingTop = 0;
+    }
+  }
+
+  document.addEventListener('scroll', stickNav);
 
 </script>
 
