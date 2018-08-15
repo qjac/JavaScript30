@@ -20,18 +20,14 @@
 	const video = document.querySelector('.flex');
 
 	function handleSpeedUpdate(e) {
-		// console.log(e);
 		const y = e.pageY - this.offsetTop;
-		// console.log(y);
-		// console.log(this.offsetHeight);
-		// console.log(y / this.offsetHeight * 100);
 		const percent = Math.round(y / this.offsetHeight * 100);
 		speedBar.style.height = `${percent}%`;
-		// console.log(percent);
+		
 		const min = 0.4;
 		const max = 4;
+		
 		const playbackRate = ((percent / 100) * (max - min) + min).toFixed(1);
-		console.log(playbackRate);
 		speedBar.textContent = `${playbackRate}x`;
 
 		video.playbackRate = playbackRate;
